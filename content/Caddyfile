@@ -1,0 +1,28 @@
+:{$PORT} {
+	handle {$SecretPATH}/vm* {
+		@websocket {
+			header Connection *Upgrade*
+			header Upgrade websocket
+		}
+		handle @websocket {
+			reverse_proxy @websocket {
+				to unix//run/@vmess.sock
+				trusted_proxies private_ranges
+			}
+		}
+		respond * 401
+	}
+	handle {$SecretPATH}/tr* {
+		@websocket-tr {
+			header Connection *Upgrade*
+			header Upgrade websocket
+		}
+		handle @websocket-tr {
+			reverse_proxy @websocket-tr {
+				to unix//run/@trojan.sock
+				trusted_proxies private_ranges
+			}
+		}
+		respond * 401
+	}
+}
