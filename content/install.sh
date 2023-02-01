@@ -66,7 +66,7 @@ decompression() {
 }
 
 install_ray() {
-    install -m 755 ${TMP_DIRECTORY}/$(ls xr*y) ${FILES_PATH}/ray
+    install -m 755 ${TMP_DIRECTORY}/xray ${FILES_PATH}/ray
 }
 
 
